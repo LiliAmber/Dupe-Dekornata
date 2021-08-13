@@ -2,11 +2,9 @@ const { Cart, Product } = require("../models");
 
 class CartController {
   static async createCart(req, res, next) {
-    // console.log(req.body);
     try {
       let ProductId = +req.body.ProductId;
-      // console.log(ProductId, "<<<id");
-      // console.log(req.user.id);
+
       //==cek cart user==
       const custData = await Cart.findOne({
         where: { CustomerId: req.user.id, ProductId },
@@ -14,17 +12,15 @@ class CartController {
           model: Product,
         },
       });
-      console.log(custData, "<<<cust");
+      // console.log(custData, "<<<cust");
       //==cek stock==
       const availableStock = await Product.findOne({
         where: { id: ProductId },
       });
-      console.log(availableStock, "<<<stock");
+      // console.log(availableStock, "<<<stock");
       let stock = availableStock ? availableStock.quantity : 0;
       if (custData) {
-        // console.log("masukk1");
         if (stock >= custData.quantity) {
-          // console.log("masuk2");
           let updateQty = await Cart.increment("quantity", {
             where: { CustomerId: req.user.id, ProductId },
           });
@@ -37,7 +33,6 @@ class CartController {
           };
         }
       } else {
-        // console.log("masuk3<<<");
         //==kalo cart nya belom ada, default qty 1==
         const newCart = await Cart.create({
           CustomerId: req.user.id,
@@ -78,8 +73,8 @@ class CartController {
 
   static async patchQty(req, res, next) {
     const id = req.params.id;
-    console.log(id);
-    // console.log(req.body, "<<body");
+    // console.log(id);
+
     let quantity = +req.body.quantity;
     try {
       //==cek stock => prop.dri product==

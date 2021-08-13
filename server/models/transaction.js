@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Transaction.belongsToMany(models.Cart, { through: "Transaction_Detail" });
+      Transaction.hasMany(models.Transaction_Detail);
     }
   }
   Transaction.init(
@@ -20,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       invoice_number: DataTypes.STRING,
       total_price: DataTypes.INTEGER,
       total_amount: DataTypes.INTEGER,
+      // Transaction_DetailId: DataTypes.INTEGER,
     },
     {
       sequelize,

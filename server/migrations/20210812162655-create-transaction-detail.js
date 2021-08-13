@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      cart_id: {
+      CartId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
@@ -19,7 +19,7 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade",
       },
-      transaction_id: {
+      TransactionId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
