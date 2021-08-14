@@ -20,16 +20,13 @@ class UserController {
         },
       });
     } catch (err) {
-      // console.log(err, "<<err");
       next(err);
     }
   }
 
   static async signin(req, res, next) {
-    console.log(req, "<<<body server");
     try {
       if (!req.body.email && !req.body.password) {
-        console.log("masukk!1");
         throw {
           name: "myError",
           status: 400,
@@ -37,7 +34,6 @@ class UserController {
         };
       } else {
         let { email, password } = req.body;
-        // console.log(req.body, "<<ini req.body");
 
         let isSignIn = await Customer.findOne({ where: { email } });
         if (isSignIn) {
@@ -45,8 +41,6 @@ class UserController {
 
           //KALO PASSWORD INVALID
           if (!isPassword) {
-            console.log("pass salah");
-
             throw {
               name: "myError",
               status: 400,
@@ -59,7 +53,7 @@ class UserController {
               address: isSignIn.address,
               username: isSignIn.username,
             });
-            // console.log(payload, "<<<<payload controller");
+
             res.status(200).json({
               id: isSignIn.id,
               email: isSignIn.email,
@@ -69,8 +63,6 @@ class UserController {
             });
           }
         } else {
-          console.log("email salah");
-
           throw {
             name: "myError",
             status: 400,
@@ -79,7 +71,6 @@ class UserController {
         }
       }
     } catch (err) {
-      //   console.log(err, "<<errr");
       next(err);
     }
   }

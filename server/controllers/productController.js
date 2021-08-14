@@ -12,18 +12,10 @@ class ProductController {
 
   static async getProductById(req, res, next) {
     let id = +req.params.id;
-    // console.log(id, "<<<");
+
     try {
       let product = await Product.findOne({ where: { id } });
-      //   if (product) {
-      //     res.status(200).json(product);
-      //   } else {
-      //     throw {
-      //       name: "myError",
-      //       status: 404,
-      //       message: "product not found!",
-      //     };
-      //   }
+
       res.status(200).json(product);
     } catch (error) {
       next(err);

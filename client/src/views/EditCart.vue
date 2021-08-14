@@ -11,7 +11,6 @@
                 <th class="text-left">ITEM</th>
                 <th class="text-left">PRICE</th>
                 <th class="text-left">QUANTITY</th>
-                <th class="text-left">TOTAL PRICE</th>
                 <th class="text-center">ACTIONS</th>
               </tr>
             </thead>
@@ -52,7 +51,7 @@
                   >
                   </v-text-field>
                 </td>
-                <td>Rp. {{ totalPrice }}</td>
+
                 <td>
                   <v-btn
                     color="#304d8b"
@@ -77,17 +76,10 @@
 <script>
 export default {
   name: "EditCart",
-  data() {
-    return {
-      totalPrice: this.editCart[0].quantity * this.editCart[0].Product.price,
-    };
-  },
   computed: {
     editCart() {
       let id = this.$route.params.id;
-      // console.log(this.$route.params, "<<<params");
-      //   console.log(id, "computedd");
-      // return id;
+
       return this.$store.state.carts.filter((item) => item.id == id);
     },
   },

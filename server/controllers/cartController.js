@@ -12,12 +12,12 @@ class CartController {
           model: Product,
         },
       });
-      // console.log(custData, "<<<cust");
+
       //==cek stock==
       const availableStock = await Product.findOne({
         where: { id: ProductId },
       });
-      // console.log(availableStock, "<<<stock");
+
       let stock = availableStock ? availableStock.quantity : 0;
       if (custData) {
         if (stock >= custData.quantity) {
@@ -42,7 +42,6 @@ class CartController {
         res.status(201).json(newCart);
       }
     } catch (err) {
-      console.log(err, "<<<err");
       next(err);
     }
   }
@@ -73,8 +72,7 @@ class CartController {
 
   static async patchQty(req, res, next) {
     const id = req.params.id;
-    // console.log(id);
-    console.log(req.body, "<<<<");
+
     let quantity = +req.body.quantity;
     try {
       //==cek stock => prop.dri product==
@@ -87,7 +85,6 @@ class CartController {
       let stock = availProduct ? availProduct.Product.quantity : 0;
 
       if (stock >= quantity) {
-        // console.log(stock, "<<<stok");
         const newQty = await Cart.update(
           { quantity },
           {

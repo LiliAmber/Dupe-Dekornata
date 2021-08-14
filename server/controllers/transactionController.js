@@ -16,14 +16,13 @@ class TransactionController {
       });
       res.status(200).json(data);
     } catch (err) {
-      console.log(err);
       next(err);
     }
   }
 
   static async createTransaction(req, res, next) {
     let CartId = +req.body.CartId;
-    // console.log(CartId, "<<<body");
+
     try {
       let custCart = await Cart.findByPk(CartId, {
         include: {
@@ -43,7 +42,6 @@ class TransactionController {
       res.status(201).json(newTrans);
       //   res.status(201).json(custCart);
     } catch (err) {
-      console.log(err, "<<<err");
       next(err);
     }
   }
@@ -64,7 +62,7 @@ class TransactionController {
 
   static async deleteUserTrans(req, res, next) {
     let id = +req.params.id;
-    console.log(id, "<<id");
+
     try {
       let delTrans = await Transaction.destroy({ where: { id } });
       res.status(200).json({ message: "transaction deleted" });
@@ -76,7 +74,7 @@ class TransactionController {
   static async createTransDetail(req, res, next) {
     let TransactionId = +req.body.TransactionId;
     let CartId = +req.body.CartId;
-    console.log(TransactionId, "<<id");
+
     try {
       let data = {
         TransactionId,
@@ -85,7 +83,6 @@ class TransactionController {
       let newDetail = await Transaction_Detail.create(data);
       res.status(201).json(newDetail);
     } catch (err) {
-      console.log(err, "<<err");
       next(err);
     }
   }

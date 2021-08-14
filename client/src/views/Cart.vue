@@ -3,14 +3,15 @@
     <p class="title display-3 text-center pa-4">SHOPPING CART</p>
     <!-- <pre>{{ carts }}</pre> -->
     <v-row class="mx-4">
-      <v-col :cols="12" md="11" sm="12">
-        <v-simple-table v-model="selected">
+      <v-col :cols="12" md="12" sm="12">
+        <v-simple-table>
           <template v-slot:default>
             <thead class="table-head">
               <tr>
                 <th class="text-left">ITEM</th>
                 <th class="text-left">PRICE</th>
                 <th class="text-left">QUANTITY</th>
+                <!-- <th class="text-left">TOTAL PRICE</th> -->
                 <th class="text-center">ACTIONS</th>
               </tr>
             </thead>
@@ -45,6 +46,7 @@
                 </td>
                 <td>Rp. {{ item.Product.price }}</td>
                 <td>{{ item.quantity }}</td>
+                <td></td>
                 <td>
                   <v-btn
                     color="#ffca52"
@@ -76,12 +78,6 @@
                 </td>
               </tr>
             </tbody>
-            <!-- <BodyTable
-              v-for="item in carts"
-              :key="item.id"
-              :cart="item"
-            ></BodyTable> -->
-            <!-- </v-row> -->
           </template>
         </v-simple-table>
       </v-col>
@@ -90,12 +86,8 @@
 </template>
 
 <script>
-import BodyTable from "../components/BodyTable.vue";
 export default {
   name: "Cart",
-  // components: {
-  //   BodyTable,
-  // },
   created() {
     this.$store.dispatch("fetchAllCart");
   },

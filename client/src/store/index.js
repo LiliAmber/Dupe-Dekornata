@@ -35,7 +35,6 @@ export default new Vuex.Store({
         url: "/products",
       })
         .then(({ data }) => {
-          console.log(data, "<<di store");
           context.commit("SET_PRODUCTS", data);
         })
         .catch((err) => {
@@ -44,14 +43,12 @@ export default new Vuex.Store({
     },
 
     signin(context, payload) {
-      // console.log(payload, "<<di store");
       axios({
         method: "POST",
         url: "/users/signin",
         data: payload,
       })
         .then(({ data }) => {
-          console.log(data, "<<data di store");
           //==simpan access_token di local storage==
           localStorage.setItem("access_token", data.access_token);
           router.push("/");
@@ -73,13 +70,11 @@ export default new Vuex.Store({
           });
         })
         .catch((err) => {
-          console.log(err.response, "<<errr");
           Swal.fire("Error", err.response.data.message, "error");
         });
     },
 
     signup(context, payload) {
-      console.log(payload, "<<regist");
       axios({
         method: "POST",
         url: "/users/signup",
@@ -106,7 +101,6 @@ export default new Vuex.Store({
           });
         })
         .catch((err) => {
-          console.log(err, "<<err");
           Swal.fire("Error", err.response.data.message, "error");
         });
     },
@@ -118,7 +112,6 @@ export default new Vuex.Store({
         url: `/products/${payload}`,
       })
         .then(({ data }) => {
-          console.log(data);
           context.commit("SET_DETAILS", data);
         })
         .catch((err) => {
@@ -135,17 +128,14 @@ export default new Vuex.Store({
         },
       })
         .then(({ data }) => {
-          console.log(data, "<<di store");
           context.commit("SET_CARTS", data);
         })
         .catch((err) => {
-          // console.log(err.response);
           Swal.fire("Error", err.response.data.message, "error");
         });
     },
 
     createCart(context, payload) {
-      // console.log(payload, "<<<store cart");
       axios({
         method: "POST",
         url: "/carts",
@@ -157,12 +147,10 @@ export default new Vuex.Store({
         },
       })
         .then(({ data }) => {
-          // console.log(data, "<<newCart");
           context.dispatch("fetchAllCart");
           router.push({ name: "Cart" });
         })
         .catch((err) => {
-          // console.log(err);
           if (err.response.data.message === "authentication failed !") {
             router.push("/signin");
           }
@@ -183,7 +171,6 @@ export default new Vuex.Store({
           context.commit("SET_TRANSACTIONS", data);
         })
         .catch((err) => {
-          // console.log(err.response);
           Swal.fire("Error", err.response.data.message, "error");
         });
     },
@@ -209,8 +196,6 @@ export default new Vuex.Store({
     },
 
     deleteCart(context, payload) {
-      console.log(payload, "<<del Cart");
-
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -240,8 +225,6 @@ export default new Vuex.Store({
               });
             })
             .catch((err) => {
-              console.log(err.response);
-
               Swal.fire({
                 position: "top-end",
                 icon: "error",
@@ -257,8 +240,7 @@ export default new Vuex.Store({
 
     patchQty(context, payload) {
       console.log(payload, "<<id qty");
-      // console.log(payload.quantity);
-      // console.log(payload.id, "<<id");
+
       let quantity = +payload.quantity;
       console.log(quantity, "<<<qty");
       let id = +payload.id;

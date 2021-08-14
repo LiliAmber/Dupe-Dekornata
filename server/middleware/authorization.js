@@ -4,10 +4,8 @@ async function authorizationCust(req, res, next) {
   const id = req.params.id;
   try {
     if (id) {
-      console.log("masukk authorisasi");
       let custCart = await Cart.findOne({ where: { id } });
       if (custCart) {
-        console.log(custCart, "<<<data author");
         if (custCart.UserId === req.user.id) {
           next();
           // next();
@@ -28,7 +26,6 @@ async function authorizationCust(req, res, next) {
       }
     }
   } catch (err) {
-    console.log(err, "<<<err autor");
     next(err);
   }
 }
