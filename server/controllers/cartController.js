@@ -74,7 +74,7 @@ class CartController {
   static async patchQty(req, res, next) {
     const id = req.params.id;
     // console.log(id);
-
+    console.log(req.body, "<<<<");
     let quantity = +req.body.quantity;
     try {
       //==cek stock => prop.dri product==

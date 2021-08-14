@@ -257,6 +257,36 @@ export default new Vuex.Store({
 
     patchQty(context, payload) {
       console.log(payload, "<<id qty");
+      // console.log(payload.quantity);
+      // console.log(payload.id, "<<id");
+      let quantity = +payload.quantity;
+      console.log(quantity, "<<<qty");
+      let id = +payload.id;
+      axios({
+        method: "PATCH",
+        url: `carts/${id}/editQty`,
+        headers: {
+          access_token: localStorage.access_token,
+        },
+        data: {
+          quantity,
+        },
+      })
+        .then(() => {
+          context.dispatch("fetchAllCart");
+          router.push("/carts");
+
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "your cart has been updated",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
     },
   },
   modules: {},

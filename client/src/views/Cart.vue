@@ -3,7 +3,7 @@
     <p class="title display-3 text-center pa-4">SHOPPING CART</p>
     <!-- <pre>{{ carts }}</pre> -->
     <v-row class="mx-4">
-      <v-col :cols="12" md="9" sm="12">
+      <v-col :cols="12" md="11" sm="12">
         <v-simple-table v-model="selected">
           <template v-slot:default>
             <thead class="table-head">
