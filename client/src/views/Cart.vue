@@ -99,7 +99,6 @@ export default {
   },
   methods: {
     delCart(id) {
-      console.log(id, "<<<");
       this.$store.dispatch("deleteCart", { id: id });
     },
     toEdit(id) {
