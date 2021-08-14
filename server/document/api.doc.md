@@ -14,3 +14,5 @@ Tech Stack used to build this app :
 - PostgreSQL
 
 Link for ERD: https://drive.google.com/file/d/1-MyHQfT9jtSGbWk0MNKPjGl7EQdJ_YT4/view?usp=sharing
+
+Link for postman: https://www.getpostman.com/collections/ddb73744742387e903cd

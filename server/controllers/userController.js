@@ -20,12 +20,13 @@ class UserController {
         },
       });
     } catch (err) {
-      //   console.log(err, "<<err");
+      // console.log(err, "<<err");
       next(err);
     }
   }
 
   static async signin(req, res, next) {
+    console.log(req, "<<<body server");
     try {
       if (!req.body.email && !req.body.password) {
         console.log("masukk!1");
