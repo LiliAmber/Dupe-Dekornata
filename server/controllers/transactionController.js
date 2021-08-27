@@ -21,7 +21,8 @@ class TransactionController {
   }
 
   static async createTransaction(req, res, next) {
-    let CartId = +req.body.CartId;
+    let CartId = req.body.id;
+    // console.log(CartId, "<<<");
 
     try {
       let custCart = await Cart.findByPk(CartId, {
@@ -42,6 +43,7 @@ class TransactionController {
       res.status(201).json(newTrans);
       //   res.status(201).json(custCart);
     } catch (err) {
+      console.log(err, "<<ini error");
       next(err);
     }
   }
